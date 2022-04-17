@@ -14,7 +14,7 @@ public class Main
     static LinkedList<Integer> linkedList = new LinkedList<Integer>();
     static Integer start = 0, end = 0, step = 0;
 
-    public static void Init()
+    private static void Init()
     {
         Scanner in = new Scanner(System.in);
         Integer userInput = -1,
@@ -33,7 +33,7 @@ public class Main
             while (userInput < 1)
                 userInput = in.nextInt();
             start = userInput;
-            end = userInput + 1;
+            end = userInput;
             step = userInput;
         }
         else
@@ -53,22 +53,124 @@ public class Main
         }
     }
 
-    public static void CompareAdd()
+    private static void Populate(Integer size)
     {
-        for (int i = start; i < end; i += step)
+        for (int i = 0; i <= size; i++)
         {
-        linkedList.clear();
-        arrayList.clear();
-        test.SetOperations(i);
-        System.out.println("Количество вызовов: " + i);
-        System.out.print("ArrayList: " + test.Add(arrayList) + "мс | ");
-        System.out.println("LinkedList: " + test.Add(linkedList) + "мс\n");
+            linkedList.add(i);
+            arrayList.add(i);
         }
     }
 
+    private static void CompareAdd()
+    {
+        System.out.println("        Добавление в середину");
+        for (int i = start; i <= end; i += step)
+        {
+            linkedList.clear(); arrayList.clear();
+            test.SetOperations(i);
+            long arrayResult = test.Add(arrayList);
+            long linkedResult = test.Add(linkedList);
+            System.out.println("    Количество вызовов: " + i);
+            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
+            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+        }
+    }
+
+    private static void CompareAddFirst()
+    {
+        System.out.println("        Добавление в начало");
+        for (int i = start; i <= end; i += step)
+        {
+            linkedList.clear(); arrayList.clear();
+            test.SetOperations(i);
+            long arrayResult = test.AddFirst(arrayList);
+            long linkedResult = test.AddFirst(linkedList);
+            System.out.println("    Количество вызовов: " + i);
+            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
+            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+        }
+    }
+
+    private static void CompareAddLast()
+    {
+        System.out.println("        Добавление в конец");
+        for (int i = start; i <= end; i += step)
+        {
+            linkedList.clear(); arrayList.clear();
+            test.SetOperations(i);
+            long arrayResult = test.AddLast(arrayList);
+            long linkedResult = test.AddLast(linkedList);
+            System.out.println("    Количество вызовов: " + i);
+            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
+            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+        }
+    }
+
+    private static void CompareRemoveFirst()
+    {
+        System.out.println("        Удаление из начала");
+        for (int i = start; i <= end; i += step)
+        {
+            linkedList.clear(); arrayList.clear();
+            Populate(i);
+            test.SetOperations(i);
+            long arrayResult = test.RemoveFirst(arrayList);
+            long linkedResult = test.RemoveFirst(linkedList);
+            System.out.println("    Количество вызовов: " + i);
+            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
+            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+        }
+    }
+
+    private static void CompareRemoveLast()
+    {
+        System.out.println("        Удаление из конца");
+        for (int i = start; i <= end; i += step)
+        {
+            linkedList.clear(); arrayList.clear();
+            Populate(i);
+            test.SetOperations(i);
+            long arrayResult = test.RemoveLast(arrayList);
+            long linkedResult = test.RemoveLast(linkedList);
+            System.out.println("    Количество вызовов: " + i);
+            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
+            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+        }
+    }
+
+    private static void CompareGet()
+    {
+        System.out.println("        Получение");
+        linkedList.clear(); arrayList.clear();
+        Populate(start);
+        for (int i = start; i <= end; i += step)
+        {
+            test.SetOperations(i);
+            long arrayResult = test.Get(arrayList);
+            long linkedResult = test.Get(linkedList);
+            System.out.println("    Количество вызовов: " + i);
+            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
+            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+        }
+    }
+
+
     public static void main(String[] args)
     {
+        Scanner in = new Scanner(System.in);
         Init();
         CompareAdd();
+        System.out.println("Press enter..."); in.nextLine();
+        CompareAddFirst();
+        System.out.println("Press enter..."); in.nextLine();
+        CompareAddLast();
+        System.out.println("Press enter..."); in.nextLine();
+        CompareRemoveFirst();
+        System.out.println("Press enter..."); in.nextLine();
+        CompareRemoveLast();
+        System.out.println("Press enter..."); in.nextLine();
+        CompareGet();
+        System.out.println("Press enter..."); in.nextLine();
     }
 }
