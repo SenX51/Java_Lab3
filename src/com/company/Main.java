@@ -62,6 +62,13 @@ public class Main
         }
     }
 
+	private static void PrintResults(Integer operations, long arrayResult, long linkedResult)
+	{
+		System.out.println("    Количество вызовов: " + operations);
+		System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
+		System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+	}
+
     private static void CompareAdd()
     {
         System.out.println("        Добавление в середину");
@@ -69,11 +76,7 @@ public class Main
         {
             linkedList.clear(); arrayList.clear();
             test.SetOperations(i);
-            long arrayResult = test.Add(arrayList);
-            long linkedResult = test.Add(linkedList);
-            System.out.println("    Количество вызовов: " + i);
-            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
-            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+			PrintResults(i, test.Add(arrayList), test.Add(linkedList));
         }
     }
 
@@ -84,11 +87,7 @@ public class Main
         {
             linkedList.clear(); arrayList.clear();
             test.SetOperations(i);
-            long arrayResult = test.AddFirst(arrayList);
-            long linkedResult = test.AddFirst(linkedList);
-            System.out.println("    Количество вызовов: " + i);
-            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
-            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+			PrintResults(i, test.AddFirst(arrayList), test.AddFirst(linkedList));
         }
     }
 
@@ -99,11 +98,7 @@ public class Main
         {
             linkedList.clear(); arrayList.clear();
             test.SetOperations(i);
-            long arrayResult = test.AddLast(arrayList);
-            long linkedResult = test.AddLast(linkedList);
-            System.out.println("    Количество вызовов: " + i);
-            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
-            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+            PrintResults(i, test.AddLast(arrayList), test.AddLast(linkedList));
         }
     }
 
@@ -115,11 +110,7 @@ public class Main
             linkedList.clear(); arrayList.clear();
             Populate(i);
             test.SetOperations(i);
-            long arrayResult = test.RemoveFirst(arrayList);
-            long linkedResult = test.RemoveFirst(linkedList);
-            System.out.println("    Количество вызовов: " + i);
-            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
-            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+			PrintResults(i, test.RemoveFirst(arrayList), test.RemoveFirst(linkedList));
         }
     }
 
@@ -131,11 +122,7 @@ public class Main
             linkedList.clear(); arrayList.clear();
             Populate(i);
             test.SetOperations(i);
-            long arrayResult = test.RemoveLast(arrayList);
-            long linkedResult = test.RemoveLast(linkedList);
-            System.out.println("    Количество вызовов: " + i);
-            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
-            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+			PrintResults(i, test.RemoveLast(arrayList), test.RemoveLast(linkedList));
         }
     }
 
@@ -147,11 +134,7 @@ public class Main
         for (int i = start; i <= end; i += step)
         {
             test.SetOperations(i);
-            long arrayResult = test.Get(arrayList);
-            long linkedResult = test.Get(linkedList);
-            System.out.println("    Количество вызовов: " + i);
-            System.out.println("ArrayList: " + arrayResult + "мс | LinkedList: " + linkedResult + "мс");
-            System.out.println("        Разница: " + Math.abs(linkedResult - arrayResult) + "мс\n");
+			PrintResults(i, test.Get(arrayList), test.Get(linkedList));
         }
     }
 
